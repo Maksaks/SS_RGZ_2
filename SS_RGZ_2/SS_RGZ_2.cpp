@@ -12,7 +12,7 @@ private:
 public:
     void CoutMap(); // показ матрицы
     void SetMap(); // установка значений матрицы
-    void DisplayMap(); // вывод игрового поля
+    void DisplayMap(); // вывод игрового поля//
     void PlayGame(); // начало игры(логика)
     void AllSetOne(); // все клетки живые
     void SetRandom(); // рандомные значения
