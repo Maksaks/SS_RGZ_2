@@ -15,10 +15,195 @@ public:
     void DisplayMap(); // вывод игрового поля
     void PlayGame(); // начало игры(логика)
     void AllSetOne(); // все клетки живые
-    void SetRandom(); // рандомные значения
+  
     Game(int sizeX, int sizeY);
     ~Game();
 };
+
+void Game::PlayGame()
+{
+    int checker, checkexit, lastchangedcheck = -1, lastchangedcheck2 = -1, iteration_number = 0;
+    while (true) {
+        // проверка на пустое поле и на зацикленность
+        checkexit = 0;
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                if (!map[i][j]) { checkexit++; }
+            }
+        }
+        //выход если пустое игровое поле
+        if (checkexit == (sizeX * sizeY)) { system("cls"); DisplayMap(); cout << "\nThe game was successfully completed on " << iteration_number << " step. Congratulations!!!\n " << endl; return; }
+        // выход если образовался бесконечный цикл клеток(в результате проверок двух итераций цикла)
+        if (lastchangedcheck == checkexit && checkexit == lastchangedcheck2 && iteration_number >= 3) { cout << "Your cells are immortal, congratulations, you are a genius!" << endl; return; }
+        lastchangedcheck2 = lastchangedcheck;
+        lastchangedcheck = checkexit;
+
+
+        system("pause");
+        system("cls");
+        cout << " Step ->" << ++iteration_number << endl;
+        checker = 0;
+        DisplayMap();
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                //проверка согласно условиям
+                // checker переменная для подсчёта соседей клетки
+                checker = 0;
+                if (i == 0 && j == 0) { // левый верхний угол
+
+                    if (map[i + 1][j]) checker++;
+                    if (map[i][j + 1]) checker++;
+                    if (map[i + 1][j + 1]) checker++;
+
+                    if (map[i + 1][sizeX - 1]) checker++;
+                    if (map[i][sizeX - 1]) checker++;
+                    if (map[sizeY - 1][sizeX - 1]) checker++;
+                    if (map[sizeY - 1][j]) checker++;
+                    if (map[sizeY - 1][j + 1]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+                    continue;
+                }
+                if (i == sizeY - 1 && j == 0) { // левый нижний угол
+                    if (map[i - 1][j]) checker++;
+                    if (map[i][j + 1]) checker++;
+                    if (map[i - 1][j + 1]) checker++;
+
+                    if (map[0][j + 1]) checker++;
+                    if (map[0][0]) checker++;
+                    if (map[0][sizeX - 1]) checker++;
+                    if (map[sizeY - 1][sizeX - 1]) checker++;
+                    if (map[sizeY - 2][sizeX - 1]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+                    continue;
+                }
+                if (i == 0 && j == sizeX - 1) { // правый верхний угол
+                    if (map[i + 1][j]) checker++;
+                    if (map[i][j - 1]) checker++;
+                    if (map[i + 1][j - 1]) checker++;
+
+                    if (map[sizeY - 1][sizeX - 2]) checker++;
+                    if (map[sizeY - 1][sizeX - 1]) checker++;
+                    if (map[sizeY - 1][0]) checker++;
+                    if (map[0][0]) checker++;
+                    if (map[1][0]) checker++;
+
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+                    continue;
+                }
+                if (i == sizeY - 1 && j == sizeX - 1) { // правый нижний угол
+                    if (map[i - 1][j]) checker++;
+                    if (map[i][j - 1]) checker++;
+                    if (map[i - 1][j - 1]) checker++;
+
+                    if (map[sizeY - 2][0]) checker++;
+                    if (map[sizeY - 1][0]) checker++;
+                    if (map[0][0]) checker++;
+                    if (map[0][sizeX - 1]) checker++;
+                    if (map[0][sizeX - 2]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+                    continue;
+                }
+                if (i == 0) { //верхняя граница
+
+                    if (map[i][j + 1]) checker++;
+                    if (map[i][j - 1]) checker++;
+                    if (map[i + 1][j]) checker++;
+                    if (map[i + 1][j + 1]) checker++;
+                    if (map[i + 1][j - 1]) checker++;
+
+                    if (map[sizeY - 1][j]) checker++;
+                    if (map[sizeY - 1][j + 1]) checker++;
+                    if (map[sizeY - 1][j - 1]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+
+                    continue;
+                }
+                if (j == 0) { //левая граница
+
+                    if (map[i - 1][j]) checker++;
+                    if (map[i][j + 1]) checker++;
+                    if (map[i + 1][j]) checker++;
+                    if (map[i + 1][j + 1]) checker++;
+                    if (map[i - 1][j + 1]) checker++;
+
+                    if (map[i][sizeX - 1]) checker++;
+                    if (map[i + 1][sizeX - 1]) checker++;
+                    if (map[i - 1][sizeX - 1]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+
+                    continue;
+                }
+                if (i == sizeY - 1) { //нижняя граница
+
+                    if (map[i][j - 1]) checker++;
+                    if (map[i][j + 1]) checker++;
+                    if (map[i - 1][j]) checker++;
+                    if (map[i - 1][j + 1]) checker++;
+                    if (map[i - 1][j - 1]) checker++;
+
+                    if (map[0][j]) checker++;
+                    if (map[0][j - 1]) checker++;
+                    if (map[0][j + 1]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+
+                    continue;
+                }
+                if (j == sizeX - 1) { //правая граница
+
+                    if (map[i + 1][j]) checker++;
+                    if (map[i - 1][j]) checker++;
+                    if (map[i][j - 1]) checker++;
+                    if (map[i + 1][j - 1]) checker++;
+                    if (map[i - 1][j - 1]) checker++;
+
+                    if (map[i][0]) checker++;
+                    if (map[i + 1][0]) checker++;
+                    if (map[i - 1][0]) checker++;
+
+                    if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                    if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+
+                    continue;
+                }
+                if (map[i - 1][j]) checker++;
+                if (map[i + 1][j]) checker++;
+                if (map[i][j + 1]) checker++;
+                if (map[i][j - 1]) checker++;
+
+                if (map[i + 1][j - 1]) checker++;
+                if (map[i + 1][j + 1]) checker++;
+                if (map[i - 1][j - 1]) checker++;
+                if (map[i - 1][j + 1]) checker++;
+
+                if (checker < 2 || checker > 3) { map[i][j] = 0; }
+                if (checker == 3 && !map[i][j]) { map[i][j] = 1; }
+            }
+        }
+    }
+}
+
+void Game::AllSetOne()
+{
+    for (int i = 0; i < sizeY; i++) {
+        for (int j = 0; j < sizeX; j++) {
+            map[i][j] = 1;
+        }
+    }
+}
 
 Game::Game(int sizeX, int sizeY)
 {
@@ -55,7 +240,10 @@ int main()
         else break;
     }
 
-   
+    Game Console(x, y);
+    Console.CoutMap();
+    Console.SetMap();
+    Console.PlayGame();
     
 
     system("pause");
