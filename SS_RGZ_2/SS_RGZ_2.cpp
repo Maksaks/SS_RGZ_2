@@ -18,8 +18,8 @@ public:
   
     Game(int sizeX, int sizeY);
     ~Game();
-};
-//
+};///
+////////
 void Game::PlayGame()
 {
     int checker, checkexit, lastchangedcheck = -1, lastchangedcheck2 = -1, iteration_number = 0;
