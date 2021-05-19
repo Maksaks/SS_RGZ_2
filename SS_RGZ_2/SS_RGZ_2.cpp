@@ -15,7 +15,7 @@ public:
     void DisplayMap(); // вывод игрового поля
     void PlayGame(); // начало игры(логика)
     void AllSetOne(); // все клетки живые
-  
+    void SetRandom(); // рандомные значения
     Game(int sizeX, int sizeY);
     ~Game();
 };
@@ -329,3 +329,9 @@ void Game::SetMap()
     }
 }
 //________________MADE_BY_Dima________________
+//________________MADE_TOGETHER________________
+void Game::SetRandom()
+{
+    for (int i = 0; i < sizeY; i++) {
+        for (int j = 0; j < sizeX; j++) {
+
