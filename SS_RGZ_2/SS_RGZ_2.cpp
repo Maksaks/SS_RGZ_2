@@ -5,7 +5,7 @@
     
 using namespace std;
 
-class Game {
+class Game {//
 private:
     int sizeX, sizeY;
     bool** map;
