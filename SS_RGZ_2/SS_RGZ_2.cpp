@@ -333,5 +333,12 @@ void Game::SetMap()
 void Game::SetRandom()
 {
     for (int i = 0; i < sizeY; i++) {
+    	for (int j = 0; j < sizeX; j++) {
+				map[i][j] = rand()%2;
+			}
+		}
+}
+//________________MADE_TOGETHER________________
+
 
 
