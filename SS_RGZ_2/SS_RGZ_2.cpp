@@ -4,8 +4,8 @@
 #include <ctime>
     
 using namespace std;
-
-class Game {//
+//________________MADE_BY_Maksim________________
+class Game {
 private:
     int sizeX, sizeY;
     bool** map;
@@ -18,8 +18,10 @@ public:
   
     Game(int sizeX, int sizeY);
     ~Game();
-};///
-////////
+};
+//________________MADE_BY_Maksim________________
+
+//________________MADE_BY_Maksim________________
 void Game::PlayGame()
 {
     int checker, checkexit, lastchangedcheck = -1, lastchangedcheck2 = -1, iteration_number = 0;
@@ -195,7 +197,9 @@ void Game::PlayGame()
         }
     }
 }
+//________________MADE_BY_Maksim________________
 
+//________________MADE_BY_Maksim________________
 void Game::AllSetOne()
 {
     for (int i = 0; i < sizeY; i++) {
@@ -204,7 +208,8 @@ void Game::AllSetOne()
         }
     }
 }
-
+//________________MADE_BY_Maksim________________
+//________________MADE_BY_Maksim________________
 Game::Game(int sizeX, int sizeY)
 {
     this->sizeX = sizeX;
@@ -226,7 +231,7 @@ Game::~Game()
         delete[] map[i];
     delete[] map;
 }
-
+//________________MADE_BY_Maksim________________
 int main()
 {
     system("color 70");
@@ -250,6 +255,7 @@ int main()
     return 0;
 }
 
+//________________MADE_BY_Dima________________
 void Game::CoutMap()
 {
     for (int i = 0; i < sizeY; i++)
@@ -259,7 +265,7 @@ void Game::CoutMap()
         cout << '\n';
     }
 }
-
+//________________MADE_BY_Dima________________
 void Game::DisplayMap()
 {
     for (int i = 0; i < sizeX * 2 + 2; i++)
@@ -279,7 +285,7 @@ void Game::DisplayMap()
         cout << "\x0df";
     cout << endl;
 }
-
+//________________MADE_BY_Dima________________
 void Game::SetMap()
 {
     while (true) {
@@ -322,3 +328,4 @@ void Game::SetMap()
         map[y][x] = 1;
     }
 }
+//________________MADE_BY_Dima________________
